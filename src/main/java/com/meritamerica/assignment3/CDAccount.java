@@ -32,7 +32,7 @@ public class CDAccount extends BankAccount {
 		return this.offering.getTerm();
 	}
 
-	public static CDAccount readFromString(String accountData) throws ParseException {
+	public CDAccount readFromString(String accountData) throws ParseException {
 		return null;
 	}
 

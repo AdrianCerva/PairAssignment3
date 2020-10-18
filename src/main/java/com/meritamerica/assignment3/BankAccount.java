@@ -1,6 +1,7 @@
 package com.meritamerica.assignment3;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BankAccount {
@@ -9,11 +10,13 @@ public class BankAccount {
 	 * Instance Variables:
 	 */
 	
-	private double accountBalance;
+	static private double accountBalance;
 //	private long masterAccountNumber = 000000000;
-	private long accountNumber;
-	private double interestRate;
-	private Date startDate;
+	static private long accountNumber;
+	static private double interestRate;
+	static private Date startDate;
+	
+	static private SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy");
 	
 	/*
 	 * Constructors:
@@ -104,7 +107,14 @@ public class BankAccount {
 		return truncatedDouble;
 	}
 	
-	public static BankAccount readFromString(String accountData) throws ParseException {
+	public BankAccount readFromString(String accountData) throws ParseException {
+		String[] accountInfo = accountData.split(",");
+		this.accountNumber = Long.valueOf(accountInfo[0]);
+		this.accountBalance = Double.valueOf(accountInfo[1]);
+		this.interestRate = Double.valueOf(accountInfo[2]);
+		this.startDate = formatter.parse(accountInfo[3]);
+		
+		//return new BankAccount();
 		return null;
 	}
 	

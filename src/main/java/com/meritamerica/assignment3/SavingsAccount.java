@@ -20,7 +20,7 @@ public class SavingsAccount extends BankAccount {
 		return 0.01;
 	}
 
-	public static SavingsAccount readFromString(String accountData) throws ParseException {
+	public SavingsAccount readFromString(String accountData) throws ParseException {
 		return null;
 	}
 

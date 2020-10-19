@@ -2,7 +2,7 @@ package com.meritamerica.assignment3;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
+//import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -74,64 +74,65 @@ public class MeritBank {
 		return total;
 	}
 
-	static boolean readFromFile(String fileName) throws ParseException {
-		//String tempLine = "";
+	static boolean readFromFile(String fileName) throws NumberFormatException, ParseException {
+		// String tempLine = "";
 
 		try {
 			File textFile = new File(fileName);
 			FileReader reader = new FileReader(textFile);
 			BufferedReader bufferedReader = new BufferedReader(reader);
-			
+
 			// Set the next available account number:
-			setNextAccountNumber(Integer.parseInt(bufferedReader.readLine()));
-			
+			setNextAccountNumber(Integer.valueOf(bufferedReader.readLine()));
+
 			CDOffering[] newOfferings = new CDOffering[Integer.valueOf(bufferedReader.readLine())];
-			
+
 			// Make x amount of CDofferings:
-			for(int i = 0; i < newOfferings.length; i++) {
+			for (int i = 0; i < newOfferings.length; i++) {
 				newOfferings[i] = CDOffering.readFromString(bufferedReader.readLine());
 			}
-			
+
 			// Make x amount of AccountHolders:
-			for(int i = 0; i < Integer.parseInt(bufferedReader.readLine()) - 1; i++) {
+			for (int i = 0; i < Integer.valueOf(bufferedReader.readLine()); i++) {
 				AccountHolder.readFromString(bufferedReader.readLine());
-				
-				// Make x amount of checking accounts:
-				for (int j = 0; j < Integer.parseInt(bufferedReader.readLine()); j++) {
+
+				// Read x amount of checking accounts:
+
+				for (int j = 0; j < Integer.valueOf(bufferedReader.readLine()); j++) {
 					CheckingAccount.readFromString(bufferedReader.readLine());
 				}
-				
-				// Make x amount of savings accounts:
-				for(int k = 0; k < Integer.parseInt(bufferedReader.readLine()); k++) {
+
+				// Read x amount of savings accounts:
+				for (int k = 0; k < Integer.valueOf(bufferedReader.readLine()); k++) {
 					SavingsAccount.readFromString(bufferedReader.readLine());
 				}
-				
-				// Make x amount of cd accounts:
-				for(int l = 0; l < Integer.parseInt(bufferedReader.readLine()); l++) {
+
+				// Read x amount of cd accounts:
+				for (int l = 0; l < Integer.valueOf(bufferedReader.readLine()); l++) {
 					CDAccount.readFromString(bufferedReader.readLine());
 				}
-				
+
 			}
-			
+
 			// Close the reader:
 			reader.close();
-
-		} catch (FileNotFoundException e) {
+			return true;
+			
+		} catch (IOException e) {
 			System.out.println("File was not found.");
 			return false;
-		} catch (IOException e) {
-			System.out.println("Input/output exception.");
-			return false;
 		} catch (ParseException e) {
-			System.out.println(e);
+			// throw new java.io.IOException();
+			System.out.println("IO error.");
 			return false;
+		} catch (NumberFormatException e) {
+			//throw new java.lang.NumberFormatException();
+			return true;
 		}
-		System.out.println("I made it to the end.");
-		return true;
 	}
 
 	static boolean writeToFile() {
-		
+
 		return false;
 	}
 

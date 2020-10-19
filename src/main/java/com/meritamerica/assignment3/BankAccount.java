@@ -115,15 +115,20 @@ public class BankAccount {
 	}
 	
 	public static BankAccount readFromString(String accountData) throws ParseException {
+		try {
+			
+		
 		String[] accountInfo = accountData.split(",");
 		
 		long accountNumber = Long.valueOf(accountInfo[0]);
 		double accountBalance = Double.valueOf(accountInfo[1]);
 		double interestRate = Double.valueOf(accountInfo[2]);
 		Date startDate = formatter.parse(accountInfo[3]);
-		
 		//return new BankAccount();
 		return new BankAccount(accountNumber,accountBalance,interestRate,startDate);
+		} catch (ParseException e){
+			return null;
+		}
 	}
 	
 	public String writeToString() {

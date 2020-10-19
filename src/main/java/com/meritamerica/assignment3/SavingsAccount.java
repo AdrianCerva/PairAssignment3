@@ -2,6 +2,8 @@ package com.meritamerica.assignment3;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SavingsAccount extends BankAccount {
 
@@ -29,7 +31,7 @@ public class SavingsAccount extends BankAccount {
 	}
 
 	public SavingsAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn) {
-		super(accountNumber, balance, accountNumber, accountOpenedOn);
+		super(accountNumber, balance, interestRate, accountOpenedOn);
 	}
 
 	/*
@@ -42,13 +44,16 @@ public class SavingsAccount extends BankAccount {
 
 	public static SavingsAccount readFromString(String accountData) throws ParseException {
 		try {
-			String[] newAccountHolder = accountData.split(",");
-			java.util.Date startDate = formatter.parse(newAccountHolder[3]);
+			//String[] newAccountHolder = accountData.split(",");
+			ArrayList<String> newAccountHolder = new ArrayList<String>(Arrays.asList(accountData.split(",")));
 
-			return new SavingsAccount(Long.parseLong(newAccountHolder[0]), Double.parseDouble(newAccountHolder[1]),
-					Double.parseDouble(newAccountHolder[2]), startDate);
+			return new SavingsAccount(Long.parseLong(newAccountHolder.get(0)),
+				Double.parseDouble(newAccountHolder.get(1)),
+				Double.parseDouble(newAccountHolder.get(2)),
+				formatter.parse(newAccountHolder.get(3)));
 		} catch (ParseException e) {
-			throw new java.lang.NumberFormatException();
+			//throw new java.lang.NumberFormatException();
+			return null;
 		}
 	}
 

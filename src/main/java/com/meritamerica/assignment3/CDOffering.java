@@ -35,4 +35,9 @@ public class CDOffering {
         return new CDOffering(Integer.parseInt(str[0]), Double.parseDouble(str[1]));
     }
 
+	public String writeToString() {
+		String newString = this.interestRate + "," + this.term;
+		return newString;
+	}
+
 }

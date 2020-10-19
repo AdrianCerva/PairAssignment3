@@ -3,8 +3,9 @@ package com.meritamerica.assignment3;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.text.ParseException;
 
-public class AccountHolder implements Comparable<AccountHolder>{
+public class AccountHolder implements Comparable<AccountHolder> {
 
 	/*
 	 * Constants:
@@ -268,7 +269,7 @@ public class AccountHolder implements Comparable<AccountHolder>{
 		return nextAccountNumber += 1;
 	}
 
-	public static AccountHolder readFromString(String accountHolderData) {
+	public static AccountHolder readFromString(String accountHolderData) throws ParseException {
 
 		String[] newAccountHolder = accountHolderData.split(",");
 		return new AccountHolder(newAccountHolder[0], newAccountHolder[1], newAccountHolder[2], newAccountHolder[3]);
@@ -277,8 +278,14 @@ public class AccountHolder implements Comparable<AccountHolder>{
 
 	@Override
 	public int compareTo(AccountHolder arg0) {
-		// Implement the compareTo(AccountHolder otherAccountHolder) method such that account holders can be sorted by 
+		// Implement the compareTo(AccountHolder otherAccountHolder) method such that
+		// account holders can be sorted by
 		// the combined balance of their accounts
 		return 0;
+	}
+
+	public String writeToString() {
+		String newString = this.firstName + "," + this.middleName + "," + this.lastName + "," + this.ssn;
+		return newString;
 	}
 }

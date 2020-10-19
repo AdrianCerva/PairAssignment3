@@ -1,9 +1,11 @@
 package com.meritamerica.assignment3;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 //import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -25,7 +27,6 @@ public class MeritBank {
 		int i = 0;
 		for (i = 0; i < accountHolders.length; i++) {
 			newAccountHolders[i] = accountHolders[i];
-			System.out.println("Inside for loop.");
 		}
 		newAccountHolders[i] = accountHolder;
 		accountHolders = newAccountHolders;
@@ -36,6 +37,7 @@ public class MeritBank {
 	}
 
 	static CDOffering[] getCDOfferings() {
+		//System.out.println(cdOfferings.length);
 		return cdOfferings;
 	}
 
@@ -131,9 +133,44 @@ public class MeritBank {
 		}
 	}
 
-	static boolean writeToFile() {
-
-		return false;
+	static boolean writeToFile(String fileName) {
+		try {
+			FileWriter fr = new FileWriter(fileName);
+			BufferedWriter bw = new BufferedWriter(fr);
+			
+			bw.write(String.valueOf(nextAccountNumber));
+			bw.newLine();
+			bw.write(String.valueOf(cdOfferings.length));
+			bw.newLine();
+			for(int i = 0; i < cdOfferings.length; i++) {
+				bw.write(cdOfferings[i].writeToString());
+				bw.newLine();
+			}
+			bw.write(String.valueOf(accountHolders.length));
+			bw.newLine();
+			for(int i = 0; i < accountHolders.length; i++) {
+				bw.write(accountHolders[i].writeToString());
+				bw.newLine();
+				bw.write(accountHolders[i].getNumberOfCheckingAccounts());
+				for(int j = 0; j < accountHolders[i].getNumberOfCheckingAccounts();j++) {
+					bw.write(String.valueOf(accountHolders[i].getCheckingAccounts()[j].writeToString()));
+					bw.newLine();
+				}
+				for(int k = 0; k < accountHolders[i].getNumberOfSavingsAccounts();k++) {
+					bw.write(String.valueOf(accountHolders[i].getSavingsAccounts()[k].writeToString()));
+					bw.newLine();
+				}
+				for(int g = 0; g < accountHolders[i].getNumberOfCDAccounts();g++) {
+					bw.write(String.valueOf(accountHolders[i].getCDAccounts()[g].writeToString()));
+					bw.newLine();
+				}
+			}
+			bw.close();
+			return true;
+		} catch (IOException e) {
+			return false;
+		}
+		
 	}
 
 	static AccountHolder[] sortAccountHolders() {

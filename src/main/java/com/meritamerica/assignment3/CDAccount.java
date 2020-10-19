@@ -1,6 +1,7 @@
 package com.meritamerica.assignment3;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CDAccount extends BankAccount {
@@ -10,6 +11,7 @@ public class CDAccount extends BankAccount {
 	 */
 
 	private CDOffering offering;
+	static private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
 	/*
 	 * Constructor:
@@ -18,6 +20,12 @@ public class CDAccount extends BankAccount {
 	CDAccount(CDOffering offering, double balance) {
 		super(balance);
 		this.offering = offering;
+	}
+	
+	CDAccount(long accountNumber, double balance, double interestRate, Date startDate, int term){
+		super(accountNumber,balance,interestRate,startDate,term);
+		//CDOffering newOffering = new CDOffering(term,interestRate);
+		
 	}
 
 	/*
@@ -32,8 +40,15 @@ public class CDAccount extends BankAccount {
 		return this.offering.getTerm();
 	}
 
-	public CDAccount readFromString(String accountData) throws ParseException {
-		return null;
+	public static CDAccount readFromString(String accountData) throws ParseException {
+		String[] newAccountHolder = accountData.split(",");
+		java.util.Date startDate = formatter.parse(newAccountHolder[3]);
+		
+		return new CDAccount(Long.parseLong(newAccountHolder[0]),
+				Double.parseDouble(newAccountHolder[1]),
+				Double.parseDouble(newAccountHolder[2]),
+				startDate, 
+				Integer.parseInt(newAccountHolder[4]));
 	}
 
 	@Override

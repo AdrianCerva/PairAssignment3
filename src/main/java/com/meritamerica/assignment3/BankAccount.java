@@ -10,13 +10,12 @@ public class BankAccount {
 	 * Instance Variables:
 	 */
 	
-	static private double accountBalance;
-//	private long masterAccountNumber = 000000000;
-	static private long accountNumber;
-	static private double interestRate;
-	static private Date startDate;
+	public double accountBalance;
+	public long accountNumber;
+	public double interestRate;
+	public Date startDate;
 	
-	static private SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy");
+	static private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 	
 	/*
 	 * Constructors:
@@ -36,14 +35,22 @@ public class BankAccount {
 	public BankAccount(long accountNumber, double balance, double interestRate) {
 		this.accountNumber = accountNumber;
 		this.accountBalance = balance;
-		this.accountNumber = accountNumber;
+		this.interestRate = interestRate;
 	}
 	
 	public BankAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn) {
 		this.accountNumber = accountNumber;
 		this.accountBalance = balance;
-		this.accountNumber = accountNumber;
+		this.interestRate = interestRate;
 		this.startDate = accountOpenedOn;
+	}
+	
+	public BankAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn, int term) {
+		this.accountNumber = accountNumber;
+		this.accountBalance = balance;
+		this.interestRate = interestRate;
+		this.startDate = accountOpenedOn;
+		
 	}
 	
 	/*
@@ -107,17 +114,23 @@ public class BankAccount {
 		return truncatedDouble;
 	}
 	
-	public BankAccount readFromString(String accountData) throws ParseException {
+	public static BankAccount readFromString(String accountData) throws ParseException {
 		String[] accountInfo = accountData.split(",");
-		this.accountNumber = Long.valueOf(accountInfo[0]);
-		this.accountBalance = Double.valueOf(accountInfo[1]);
-		this.interestRate = Double.valueOf(accountInfo[2]);
-		this.startDate = formatter.parse(accountInfo[3]);
+		
+		long accountNumber = Long.valueOf(accountInfo[0]);
+		double accountBalance = Double.valueOf(accountInfo[1]);
+		double interestRate = Double.valueOf(accountInfo[2]);
+		Date startDate = formatter.parse(accountInfo[3]);
 		
 		//return new BankAccount();
-		return null;
+		return new BankAccount(accountNumber,accountBalance,interestRate,startDate);
 	}
 	
+	public String writeToString() {
+		String newString = this.accountNumber + "," + this.accountBalance + "," + this.interestRate + "," + this.startDate;
+		return newString;
+	}
+
 	public String toString() {
 		
 		return  "Account Balance: $" + getBalance() + "\n" +

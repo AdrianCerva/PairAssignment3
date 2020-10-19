@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class MeritAmericaBankApp {
 	public static void main(String[] args) {
 		
-		MeritBank.readFromFile("src/test/testMeritBank_good.txt");
+		//MeritBank.readFromFile("src/test/testMeritBank_good.txt");
 		
     	//CDOffering[] CDOfferings = new CDOffering[5];
     	

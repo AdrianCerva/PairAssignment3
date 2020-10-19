@@ -97,8 +97,7 @@ public class MeritBank {
 				AccountHolder.readFromString(bufferedReader.readLine());
 				
 				// Make x amount of checking accounts:
-				for(int j = 0; j < Integer.parseInt(bufferedReader.readLine()); j++){
-					//System.out.println(bufferedReader.readLine());
+				for (int j = 0; j < Integer.parseInt(bufferedReader.readLine()); j++) {
 					CheckingAccount.readFromString(bufferedReader.readLine());
 				}
 				
@@ -122,6 +121,9 @@ public class MeritBank {
 			return false;
 		} catch (IOException e) {
 			System.out.println("Input/output exception.");
+			return false;
+		} catch (ParseException e) {
+			System.out.println(e);
 			return false;
 		}
 		System.out.println("I made it to the end.");

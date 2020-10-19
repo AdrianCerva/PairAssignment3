@@ -53,8 +53,7 @@ public class CheckingAccount extends BankAccount {
 				Double.parseDouble(newAccountHolder[2]),
 				startDate);
 		} catch (ParseException e) {
-			System.out.println(e);
-			return null;
+			throw new java.lang.NumberFormatException();
 		}
 	}
 	

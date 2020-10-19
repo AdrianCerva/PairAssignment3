@@ -21,11 +21,11 @@ public class CDAccount extends BankAccount {
 		super(balance);
 		this.offering = offering;
 	}
-	
-	CDAccount(long accountNumber, double balance, double interestRate, Date startDate, int term){
-		super(accountNumber,balance,interestRate,startDate,term);
-		//CDOffering newOffering = new CDOffering(term,interestRate);
-		
+
+	CDAccount(long accountNumber, double balance, double interestRate, Date startDate, int term) {
+		super(accountNumber, balance, interestRate, startDate, term);
+		// CDOffering newOffering = new CDOffering(term,interestRate);
+
 	}
 
 	/*
@@ -41,14 +41,15 @@ public class CDAccount extends BankAccount {
 	}
 
 	public static CDAccount readFromString(String accountData) throws ParseException {
-		String[] newAccountHolder = accountData.split(",");
-		java.util.Date startDate = formatter.parse(newAccountHolder[3]);
-		
-		return new CDAccount(Long.parseLong(newAccountHolder[0]),
-				Double.parseDouble(newAccountHolder[1]),
-				Double.parseDouble(newAccountHolder[2]),
-				startDate, 
-				Integer.parseInt(newAccountHolder[4]));
+		try {
+			String[] newAccountHolder = accountData.split(",");
+			java.util.Date startDate = formatter.parse(newAccountHolder[3]);
+
+			return new CDAccount(Long.parseLong(newAccountHolder[0]), Double.parseDouble(newAccountHolder[1]),
+					Double.parseDouble(newAccountHolder[2]), startDate, Integer.parseInt(newAccountHolder[4]));
+		} catch (ParseException e) {
+			throw new java.lang.NumberFormatException();
+		}
 	}
 
 	@Override

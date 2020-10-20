@@ -278,10 +278,12 @@ public class AccountHolder implements Comparable<AccountHolder> {
 
 	@Override
 	public int compareTo(AccountHolder arg0) {
-		// Implement the compareTo(AccountHolder otherAccountHolder) method such that
-		// account holders can be sorted by
-		// the combined balance of their accounts
-		return 0;
+
+		if (this.getCombinedBalance() > arg0.getCombinedBalance()) {
+			return 1;
+		} else {
+			return -1;
+		}
 	}
 
 	public String writeToString() {
